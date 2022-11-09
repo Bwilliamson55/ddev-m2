@@ -4,6 +4,7 @@
     <module name="SwiftOtter_FriendRecommendations">
         <sequence>
             <module name="Magento_GraphQl" />
+            <module name="Magento_Catalog" />
         </sequence>
     </module>
 </config>
