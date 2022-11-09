@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @by SwiftOtter, Inc.
+ * @website https://swiftotter.com
+ **/
+-->
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+    <table name="friend_recommendations_list" resource="default" engine="innodb" comment="Friend Recommendation Lists">
+        <column xsi:type="smallint" name="id" unsigned="true" nullable="false" identity="true" comment="ID"/>
+        <column xsi:type="varchar" name="email" nullable="false" length="255" comment="User Email" />
+        <column xsi:type="varchar" name="friend_name" nullable="false" length="255" comment="Friend Name" />
+        <column xsi:type="varchar" name="title" nullable="true" length="255" comment="List Title" />
+        <column xsi:type="text" name="note" nullable="true" comment="Note" />
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="id" />
+        </constraint>
+    </table>
+    <table name="friend_recommendations_product" resource="default" engine="innodb" comment="Friend Recommendation Products">
+        <column xsi:type="smallint" name="id" unsigned="true" nullable="false" identity="true" comment="ID" />
+        <column xsi:type="smallint" name="list_id" unsigned="true" nullable="false" comment="Recommendations List ID" />
+        <column xsi:type="varchar" name="sku" nullable="false" length="64" comment="Product SKU" />
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="id" />
+        </constraint>
+        <constraint xsi:type="foreign" referenceId="FRIEND_RECOMMENDATIONS_PRODUCT_LIST_ID_FRIEND_RECOMMENDATIONS_LIST_ID" table="friend_recommendations_product"
+                    column="list_id" referenceTable="friend_recommendations_list" referenceColumn="id" onDelete="CASCADE" />
+    </table>
+</schema>

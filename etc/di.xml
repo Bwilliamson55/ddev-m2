@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @by SwiftOtter, Inc.
+ * @website https://swiftotter.com
+ **/
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="SwiftOtter\FriendRecommendations\Api\Data\RecommendationListInterface"
+                type="SwiftOtter\FriendRecommendations\Model\RecommendationList" />
+    <preference for="SwiftOtter\FriendRecommendations\Api\Data\RecommendationListSearchResultsInterface"
+                type="SwiftOtter\FriendRecommendations\Model\RecommendationListSearchResults" />
+    <preference for="SwiftOtter\FriendRecommendations\Api\RecommendationListRepositoryInterface"
+                type="SwiftOtter\FriendRecommendations\Model\RecommendationListRepository" />
+
+    <preference for="SwiftOtter\FriendRecommendations\Api\Data\RecommendationListProductInterface"
+                type="SwiftOtter\FriendRecommendations\Model\RecommendationListProduct" />
+    <preference for="SwiftOtter\FriendRecommendations\Api\Data\RecommendationListProductSearchResultsInterface"
+                type="SwiftOtter\FriendRecommendations\Model\RecommendationListProductSearchResults" />
+    <preference for="SwiftOtter\FriendRecommendations\Api\RecommendationListProductRepositoryInterface"
+                type="SwiftOtter\FriendRecommendations\Model\RecommendationListProductRepository" />
+</config>
