@@ -30,7 +30,7 @@ class RecommendationListIdsFilter implements CustomFilterInterface
 
         $this->joinRecommendationLists($collection);
 
-        $collection->addFieldToFilter('recommendation_products.list_id', ['in' => $value]);
+        $collection->getSelect()->where('recommendation_products.list_id IN (?)', $value);
         return true;
     }
 
@@ -42,7 +42,7 @@ class RecommendationListIdsFilter implements CustomFilterInterface
 
         $collection->getSelect()->join(
             ['recommendation_products' => $collection->getConnection()->getTableName('friend_recommendations_product')],
-            ProductCollection::MAIN_TABLE_ALIAS . '.sku = recommendation_products.sku AND ',
+            ProductCollection::MAIN_TABLE_ALIAS . '.sku = recommendation_products.sku',
             []
         );
 

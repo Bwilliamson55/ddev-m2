@@ -19,12 +19,4 @@
                 type="SwiftOtter\FriendRecommendations\Model\RecommendationListProductSearchResults" />
     <preference for="SwiftOtter\FriendRecommendations\Api\RecommendationListProductRepositoryInterface"
                 type="SwiftOtter\FriendRecommendations\Model\RecommendationListProductRepository" />
-
-    <virtualType name="Magento\Catalog\Model\Api\SearchCriteria\CollectionProcessor\ProductFilterProcessor">
-        <arguments>
-            <argument name="customFilters" xsi:type="array">
-                <item name="recommendation_list_ids" xsi:type="object">SwiftOtter\FriendRecommendations\Api\SearchCriteria\ProductCollectionProcessor\FilterProcessor\RecommendationListIdsFilter</item>
-            </argument>
-        </arguments>
-    </virtualType>
 </config>
