@@ -1,0 +1,26 @@
+type Query {
+    customerRecommendationLists: [RecommendationList] @doc(description: "Return friend recommendation lists for the customer")
+}
+
+type RecommendationList {
+    friendName: String! @doc(description: "Name of the friend who made the recommendation list")
+    title: String @doc(description: "List title")
+    note: String @doc(description: "Friend's note")
+    products: [RecommendationListProduct!] @doc(description: "List of products on the recommendation list")
+}
+
+type RecommendationListProduct {
+    name: String! @doc(description: "Product name")
+    sku: String! @doc(description: "Product SKU")
+    thumbnailUrl: String @doc(description: "Product thumbnail image URL")
+}
+
+type Mutation {
+    createRecommendationList(
+        email: String! @doc(description: "Email this list is being shared with")
+        friendName: String! @doc(description: "Name of the friend sharing this list")
+        title: String @doc(description: "List title")
+        note: String @doc(description: "Personal note")
+        productSkus: [String!]! @doc(description: "List of SKUs being recommended")
+    ): RecommendationList! @doc(description: "Create a friend recommendation list")
+}
