@@ -22,5 +22,12 @@ type Mutation {
         title: String @doc(description: "List title")
         note: String @doc(description: "Personal note")
         productSkus: [String!]! @doc(description: "List of SKUs being recommended")
-    ): RecommendationList! @doc(description: "Create a friend recommendation list")
+    ): RecommendationListSaved! @doc(description: "Create a friend recommendation list")
+}
+
+type RecommendationListSaved {
+    email: String! @doc(description: "Email list was shared with")
+    friendName: String! @doc(description: "Name of the friend who made the recommendation list")
+    title: String @doc(description: "List title")
+    note: String @doc(description: "Friend's note")
 }

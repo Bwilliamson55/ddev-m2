@@ -5,9 +5,15 @@ namespace SwiftOtter\FriendRecommendations\Model;
 
 use Magento\Framework\Model\AbstractModel;
 use SwiftOtter\FriendRecommendations\Api\Data\RecommendationListProductInterface;
+use SwiftOtter\FriendRecommendations\Model\ResourceModel\RecommendationListProduct as RecommendationListProductResource;
 
 class RecommendationListProduct extends AbstractModel implements RecommendationListProductInterface
 {
+    protected function _construct()
+    {
+        $this->_init(RecommendationListProductResource::class);
+    }
+
     public function getListId(): int
     {
         return (int) $this->_getData('list_id');

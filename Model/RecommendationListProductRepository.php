@@ -75,7 +75,7 @@ class RecommendationListProductRepository implements RecommendationListProductRe
     {
         try {
             $this->listProductResource->save($listProduct);
-            $savedListProduct = $this->getById($listProduct->getId());
+            $savedListProduct = $this->getById((int) $listProduct->getId());
         } catch (\Exception $e) {
             throw new CouldNotSaveException(__($e->getMessage()));
         }
