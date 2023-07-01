@@ -1,5 +1,5 @@
 # DDEV Magento 2.4.5 boilerplate
-Currently, with Varnish and Elasticsearch.  
+Currently, with Varnish, Elasticsearch, and RabbitMQ  
 Redis may be next, but it's easy to add via 
 ```shell
 ddev get drud/ddev-redis
@@ -17,9 +17,9 @@ This is essentially the [Official DDEV quickstart guide](https://ddev.readthedoc
 # Installation
 1. Make a folder, cd into it, clone the repo
 ```bash
-mkdir m2-project && cd $_
-git clone git@github.com:bwilliamson55/ddev-m2.git . 
+git clone git@github.com:bwilliamson55/ddev-m2.git ./m2-project 
 ```
+
 2. Run `ddev start` and wait for it to finish.
 3. Create your project with composer
 ```bash
