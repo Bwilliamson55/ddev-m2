@@ -10,7 +10,7 @@ backend default {
     .port = "80";
     .first_byte_timeout = 600s;
     .probe = {
-        .url = "/pub/health_check.php";
+        .url = "/health_check.php";
             .timeout = 2s;
             .interval = 5s;
             .window = 10;
@@ -232,6 +232,9 @@ sub vcl_deliver {
         set resp.http.Cache-Control = "no-store, no-cache, must-revalidate, max-age=0";
     }
 
+    if (!resp.http.X-Magento-Debug) {
+        unset resp.http.Age;
+    }
     unset resp.http.X-Magento-Debug;
     unset resp.http.X-Magento-Tags;
     unset resp.http.X-Powered-By;
