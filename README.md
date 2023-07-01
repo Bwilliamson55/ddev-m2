@@ -75,7 +75,7 @@ ddev restart
 8. Visit your site at `https://m2-project.ddev.site/` and login at `https://m2-project.ddev.site/admin`
 
 # Varnish
-Varnish is configured via the `.ddev/varnish/default.vcl` file.  It's configured to cache everything except the admin and graphql.  If you want to cache graphql, you'll need to edit the `default.vcl` file.
+Varnish is configured via the `.ddev/varnish/default.vcl` file. 
 
 Watch the log stream with `ddev varnishlog`
 If you flush the cache (`ddev magento c:f`) during this time, you should see the PURGE event in the log stream.
