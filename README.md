@@ -1,6 +1,6 @@
 # DDEV Magento 2.4.5 boilerplate
-Currently, with Varnish, Elasticsearch, and RabbitMQ  
-Redis may be next, but it's easy to add via 
+Currently, with Varnish and Elasticsearch.  
+Redis may be next, but it's easy to add via
 ```shell
 ddev get drud/ddev-redis
 ddev restart
@@ -17,19 +17,19 @@ This is essentially the [Official DDEV quickstart guide](https://ddev.readthedoc
 # Installation
 1. Make a folder, cd into it, clone the repo
 ```bash
-git clone git@github.com:bwilliamson55/ddev-m2.git ./m2-project 
+mkdir m2-project && cd $_
+git clone git@github.com:bwilliamson55/ddev-m2.git . 
 ```
-
 2. Run `ddev start` and wait for it to finish.
 3. Create your project with composer
 ```bash
 ddev composer create --repository=https://repo.magento.com/ magento/project-community-edition:2.4.5 -y 
 ```
 4. Follow the prompts to enter your Magento credentials.
-5. Run the Magento installer - REPLACE: 
-   - the base-url with your project's URL - It's the projects name, in this case, `m2-project.ddev.site`
-   - the admin email, username, and password with your own
-   - the admin URI with your own
+5. Run the Magento installer - REPLACE:
+    - the base-url with your project's URL - It's the projects name, in this case, `m2-project.ddev.site`
+    - the admin email, username, and password with your own
+    - the admin URI with your own
 ```bash
 ddev magento setup:install \
     --base-url='https://m2-project.ddev.site/' \
