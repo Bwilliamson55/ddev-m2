@@ -1,5 +1,8 @@
 name: m2-project
 type: magento2
+timezone: America/New_York
+host_db_port: "3307"
+omit_containers: [dba]
 docroot: pub
 php_version: "8.1"
 webserver_type: nginx-fpm
@@ -7,7 +10,7 @@ router_http_port: "80"
 router_https_port: "443"
 xdebug_enabled: false
 additional_hostnames: []
-additional_fqdns: []
+additional_fqdns: ["magento.test"]
 database:
     type: mariadb
     version: "10.4"
