@@ -9,13 +9,7 @@ backend default {
     .host = "web";
     .port = "80";
     .first_byte_timeout = 600s;
-    .probe = {
-        .url = "/health_check.php";
-            .timeout = 2s;
-            .interval = 5s;
-            .window = 10;
-            .threshold = 5;
-            }
+    .between_bytes_timeout = 300s;
 }
 
 acl purge {
@@ -64,13 +58,13 @@ sub vcl_recv {
         return (pass);
     }
 
-    # Bypass customer, shopping cart, checkout
-    if (req.url ~ "/customer" || req.url ~ "/checkout") {
+    # Bypass customer, shopping cart, checkout and search requests
+    if (req.url ~ "/customer" || req.url ~ "/checkout" || req.url ~ "/catalogsearch") {
         return (pass);
     }
 
     # Bypass health check requests
-    if (req.url ~ "^/(pub/)?(health_check.php)$") {
+    if (req.url ~ "^/(pub/)?(health_check.php|health.php)$") {
         return (pass);
     }
 
@@ -126,6 +120,11 @@ sub vcl_recv {
 sub vcl_hash {
     if ((req.url !~ "/graphql" || !req.http.X-Magento-Cache-Id) && req.http.cookie ~ "X-Magento-Vary=") {
         hash_data(regsub(req.http.cookie, "^.*?X-Magento-Vary=([^;]+);*.*$", "\1"));
+    }
+
+    # Cache AJAX replies seperately than non-AJAX
+    if (req.http.X-Requested-With) {
+        hash_data(req.http.X-Requested-With);
     }
 
     # To make sure http users don't see ssl warning
@@ -208,16 +207,18 @@ sub vcl_backend_response {
 }
 
 sub vcl_deliver {
-
+    # Always include hit/miss information in response
     if (resp.http.x-varnish ~ " ") {
-               set resp.http.X-EQP-Cache = "HIT";
-           } else {
-               set resp.http.X-EQP-Cache = "MISS";
+        set resp.http.X-Cache = "HIT";
+        set resp.http.X-EQP-Cache = "HIT";
+    } else {
+        set resp.http.X-Cache = "MISS";
+        set resp.http.X-EQP-Cache = "MISS";
     }
+    set resp.http.X-Cache-Hits = obj.hits;
     if (resp.http.X-Magento-Debug) {
         if (resp.http.x-varnish ~ " ") {
             set resp.http.X-Magento-Cache-Debug = "HIT";
-            set resp.http.Grace = req.http.grace;
         } else {
             set resp.http.X-Magento-Cache-Debug = "MISS";
         }
@@ -245,7 +246,7 @@ sub vcl_deliver {
 }
 
 sub vcl_hit {
-    if (obj.ttl >= 0s) {
+    if (obj.ttl +300s >= 0s) {
         # Hit within TTL period
         return (deliver);
     }
