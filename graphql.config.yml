@@ -1,0 +1,2 @@
+schema: https://m2-project.ddev.site/graphql
+documents: '**/*.graphql'
