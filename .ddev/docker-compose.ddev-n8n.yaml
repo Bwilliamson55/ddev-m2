@@ -1,7 +1,7 @@
 #ddev-generated
 # Simple template to demonstrate addon-template
 services:
-  ddev-n8n:
+  n8n:
     container_name: ddev-${DDEV_SITENAME}-n8n
     hostname: ${DDEV_SITENAME}-n8n
     image: n8nio/n8n
@@ -50,12 +50,17 @@ services:
       - N8N_HIDE_USAGE_PAGE=true
     # These labels ensure this service is discoverable by ddev.
     labels:
-      com.ddev.site-name: ${SUBDOMAIN}.${DDEV_SITENAME}
+      # This needs to remain DDEV_SITENAME for ddev describe to show n8n
+      # The unfortunate downside is that it shows as "<projectname>.ddev.site" instead of "n8n.<projectname>.ddev.site"
+      com.ddev.site-name: ${DDEV_SITENAME}
       com.ddev.approot: $DDEV_APPROOT
     depends_on:
       - web
     links:
       - web
+    # Allow http API calls from n8n to the web container
+    external_links:
+      - "ddev-router:${DDEV_HOSTNAME}"
     volumes:
     - "./n8n/.n8n:/home/node/.n8n"
     - ".:/mnt/ddev_config"
