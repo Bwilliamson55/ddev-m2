@@ -1,9 +1,11 @@
-#ddev-generated
 # Simple template to demonstrate addon-template
 services:
   n8n:
     container_name: ddev-${DDEV_SITENAME}-n8n
     hostname: ${DDEV_SITENAME}-n8n
+    build:
+      context: https://github.com/Bwilliamson55/n8n-custom-images.git
+      dockerfile: ./bwill-nodes-simple/Dockerfile
     image: n8nio/n8n
     command: n8n start
     networks: [default, ddev_default]
