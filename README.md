@@ -115,7 +115,7 @@ ddev config --disable-settings-management=false
 ddev restart
 ```
 8. Visit your site at `https://m2-project.ddev.site/` and login at `https://m2-project.ddev.site/admin`
-
+ 
 # Varnish
 Varnish is configured via the `.ddev/varnish/default.vcl` file. 
 
@@ -124,3 +124,15 @@ If you flush the cache (`ddev magento c:f`) during this time, you should see the
 
 For troubleshooting, check out the repository readme for all the CLI commands: [https://github.com/ddev/ddev-varnish](https://github.com/ddev/ddev-varnish)  
 The only issue I've run into was a 503 "Backend fetch failed" error.  This was due to the health probe considering the backend as down.
+
+# Note for 2.4.6 branch
+To configure opensearch after `ddev restart` run
+```bash
+php bin/magento config:set catalog/search/engine elasticsearch7
+php bin/magento config:set catalog/search/elasticsearch7_server_hostname opensearch
+php bin/magento config:set catalog/search/elasticsearch7_server_port 9200
+php bin/magento config:set catalog/search/elasticsearch7_index_prefix magento2
+php bin/magento config:set catalog/search/elasticsearch7_enable_auth 0
+php bin/magento config:set catalog/search/elasticsearch7_server_timeout 15
+```
+Yes we still say the engine is elasticsearch. 
