@@ -128,11 +128,10 @@ The only issue I've run into was a 503 "Backend fetch failed" error.  This was d
 # Note for 2.4.6 branch
 To configure opensearch after `ddev restart` run
 ```bash
-php bin/magento config:set catalog/search/engine elasticsearch7
-php bin/magento config:set catalog/search/elasticsearch7_server_hostname opensearch
-php bin/magento config:set catalog/search/elasticsearch7_server_port 9200
-php bin/magento config:set catalog/search/elasticsearch7_index_prefix magento2
-php bin/magento config:set catalog/search/elasticsearch7_enable_auth 0
-php bin/magento config:set catalog/search/elasticsearch7_server_timeout 15
+bin/magento config:set catalog/search/engine opensearch
+bin/magento config:set catalog/search/opensearch_server_hostname http://opensearch
+bin/magento config:set catalog/search/opensearch_server_port 9200
+bin/magento config:set catalog/search/opensearch_index_prefix magento2
+bin/magento config:set catalog/search/opensearch_enable_auth 0
+bin/magento config:set catalog/search/opensearch_server_timeout 15
 ```
-Yes we still say the engine is elasticsearch. 
